@@ -20,13 +20,13 @@ echo "...done! zsh-autosuggestions installed!"
 echo "Removing default .zshrc and replacing it with a symlink pointing to ours..."
 [[ ! -f "/Users/$USER/.zshrc" ]] || rm "/Users/$USER/.zshrc"
 [[ ! -f ~/.zshrc ]] || rm ~/.zshrc
-ln -s ~/dotfiles/.zshrc "/Users/$USER/.zshrc"
+ln -s "$DEVHOME/dotfiles/.zshrc" "/Users/$USER/.zshrc"
 echo "...done!"
 
 # Create a symlink in the new home directory to point to our p10k config
 echo "Creating a symlink to our powerlevel10k configuration..."
 [[ ! -f ~/.p10k.zsh ]] || rm ~/.p10k.zsh
-ln -s ~/dotfiles/.p10k.zsh ~/.p10k.zsh
+ln -s "$DEVHOME/dotfiles/.p10k.zsh" "$DEVHOME/.p10k.zsh"
 echo "...done!"
 
 # Create a symlink in the new home directory to point to our global gitconfig
