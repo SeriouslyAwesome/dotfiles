@@ -1,8 +1,16 @@
-DEVHOME=~/Development
+export DEVHOME=~/Development
 cd $DEVHOME
 
+# Initialize homebrew
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
+# Fix GPG for signing commits
 export GPG_TTY=$(tty)
+
+# Prepare FZF
 export FZF_BASE=/opt/homebrew/bin/fzf
+export FZF_DEFAULT_COMMAND='fzf'
+[[ ! -f "$DEVHOME/.fzf.zsh" ]] || source "$DEVHOME/.fzf.zsh"
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
@@ -125,11 +133,13 @@ source $ZSH/oh-my-zsh.sh
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f "$DEVHOME/.p10k.zsh" ]] || source "$DEVHOME/.p10k.zsh"
-[[ ! -f "$DEVHOME/.fzf.zsh" ]] || source "$DEVHOME/.fzf.zsh"
-
-# Initialize homebrew
-eval "$(/opt/homebrew/bin/brew shellenv)"
 
 export NVM_DIR="$HOME/Development/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+[[ -f /opt/dev/sh/chruby/chruby.sh ]] && type chruby >/dev/null 2>&1 || chruby () { source /opt/dev/sh/chruby/chruby.sh; chruby "$@"; }
+
+[[ -x /opt/homebrew/bin/brew ]] && eval $(/opt/homebrew/bin/brew shellenv)
+
+[ -f /opt/dev/dev.sh ] && source /opt/dev/dev.sh
